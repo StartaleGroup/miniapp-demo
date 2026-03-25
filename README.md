@@ -1,10 +1,10 @@
 This is a [Vite](https://vitejs.dev) project bootstrapped with [`@farcaster/create-mini-app`](https://github.com/farcasterxyz/frames/tree/main/packages/create-mini-app).
 
-## Preview
+<!-- ## Preview -->
 
-![Inking Mini App Preview](https://inking-farcaster-miniapp.vercel.app/preview.png)
+<!-- ![Inking Mini App Preview](https://inking-farcaster-miniapp.vercel.app/preview.png)
 
-**Live App**: https://inking-farcaster-miniapp.vercel.app/
+**Live App**: https://inking-farcaster-miniapp.vercel.app/ -->
 
 ## `farcaster.json`
 
