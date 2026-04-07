@@ -5,6 +5,7 @@ import { MintGallery } from "./MintGallery";
 import { NotificationSection } from "./NotificationSection";
 import { useAppContext } from "./hooks/useAppContext";
 import { useClipboardCopy } from "./hooks/useClipboardCopy";
+import { useMiniAppEvent } from "./hooks/useMiniAppEvent";
 import { useMintSuccessNotification } from "./hooks/useMintSuccessNotification";
 import { useSafeAreaInsets } from "./hooks/useSafeAreaInsets";
 import { useUsdcBalance } from "./hooks/useTokenBalance";
@@ -226,12 +227,18 @@ function ConnectMenu() {
 
 function MintGalleryWithNotifications({ address }: { address: `0x${string}` }) {
   const handleMintSuccess = useMintSuccessNotification("inking-notification-details");
+  const { sendMiniAppEvent } = useMiniAppEvent();
+
+  const handleMint = () => {
+    handleMintSuccess();
+    sendMiniAppEvent("nft_minted", { address, collection: "inking" });
+  };
 
   return (
     <MintGallery
       address={address}
       storagePrefix="inking"
-      onMintSuccess={handleMintSuccess}
+      onMintSuccess={handleMint}
       emptySlotBg="#333"
       emptySlotBorder="#555"
     />
