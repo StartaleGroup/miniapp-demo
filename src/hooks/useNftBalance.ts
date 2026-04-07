@@ -38,15 +38,12 @@ export function useNftBalance(address: `0x${string}`, storagePrefix: string) {
     }
   });
 
-  // Sync: when on-chain balance loads, use the higher value
+  // Sync: on-chain balance is the source of truth
   useEffect(() => {
     if (balance !== undefined) {
       const onChain = Number(balance);
-      setLocalCount((prev) => {
-        const next = Math.max(prev, onChain);
-        localStorage.setItem(`${storagePrefix}-nft-count-${address}`, next.toString());
-        return next;
-      });
+      setLocalCount(onChain);
+      localStorage.setItem(`${storagePrefix}-nft-count-${address}`, onChain.toString());
     }
   }, [balance, address, storagePrefix]);
 

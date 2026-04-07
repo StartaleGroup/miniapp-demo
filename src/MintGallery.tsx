@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 import { soneium } from "wagmi/chains";
 import { useMintCooldown } from "./hooks/useMintCooldown";
@@ -35,6 +35,7 @@ export function MintGallery({
 
   const { writeContract, data: hash, isPending, error } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
+  const handledHashRef = useRef<string | undefined>();
 
   const handleMint = () => {
     writeContract({
@@ -46,20 +47,21 @@ export function MintGallery({
     });
   };
 
-  // On successful mint: update count, save time, call callback
+  // On successful mint: update count, save time, call callback (once per tx hash)
   useEffect(() => {
-    if (isSuccess) {
-      setLocalCount((prev) => {
-        const next = prev + 1;
-        localStorage.setItem(`${storagePrefix}-nft-count-${address}`, next.toString());
-        return next;
-      });
-      const now = Date.now();
-      setLastMintTime(now);
-      localStorage.setItem(`${storagePrefix}-last-mint-time`, now.toString());
-      onMintSuccess?.();
-    }
-  }, [isSuccess, address, storagePrefix, onMintSuccess, setLocalCount, setLastMintTime]);
+    if (!isSuccess || !hash || handledHashRef.current === hash) return;
+    handledHashRef.current = hash;
+
+    setLocalCount((prev) => {
+      const next = prev + 1;
+      localStorage.setItem(`${storagePrefix}-nft-count-${address}`, next.toString());
+      return next;
+    });
+    const now = Date.now();
+    setLastMintTime(now);
+    localStorage.setItem(`${storagePrefix}-last-mint-time`, now.toString());
+    onMintSuccess?.();
+  }, [isSuccess, hash, address, storagePrefix, onMintSuccess, setLocalCount, setLastMintTime]);
 
   const totalNfts = localCount;
   const nftCount = totalNfts === 0 ? 0 : totalNfts % 10 || 10;
