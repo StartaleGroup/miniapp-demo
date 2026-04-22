@@ -244,7 +244,7 @@ function MintGalleryWithNotifications({ address }: { address: `0x${string}` }) {
 
 function MissionsSection() {
   const [status, setStatus] = useState<MissionStatus | null>(null);
-  const [completeResult, setCompleteResult] = useState<{ success: true } | null>(null);
+  const [completeResult, setCompleteResult] = useState<{ success: boolean } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<"status" | "complete" | null>(null);
 
