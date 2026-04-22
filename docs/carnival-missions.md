@@ -172,4 +172,4 @@ The in-app reference UI for this flow is the **Missions** section in the wallet-
 - **User binding**: Mission state is scoped to the connected Startale App user; there is no user parameter on either method.
 - **Error handling**: Both methods return promises — always wrap calls in `try / catch` and surface failures to the UI. The host may reject if the user is not authenticated, the campaign is not active, or the method is not supported by the running host version.
 - **Points semantics**: `amountAwarded` reflects mission-specific points and is distinct from the user's global STAR point balance exposed via `sdk.context.startale.starPoints`.
-- **Retries**: `completeMission()` can be safely retried on transient errors. Once the mission is already completed, a retry may resolve with `{ success: true }` or reject with an "already completed" message — both indicate success; handle the rejection defensively.
+- **Retries**: `completeMission()` can be safely retried on transient errors. Once the mission is already completed, a retry will resolve with `{ success: true }` .
