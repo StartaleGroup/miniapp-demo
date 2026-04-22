@@ -10,7 +10,7 @@ export type MissionStatus = {
 type StartaleNamespace = {
   startale: {
     getMissionStatus: () => Promise<MissionStatus>;
-    completeMission: () => Promise<{ success: boolean }>;
+    completeMission: () => Promise<{ success: true }>;
   };
 };
 
