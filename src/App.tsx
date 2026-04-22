@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useBalance, useConnect, useConnection, useConnectors, useDisconnect, useSignMessage } from "wagmi";
+import { completeMission, getMissionStatus, type MissionStatus } from "./startale";
 import { ContextSection } from "./ContextSection";
 import { MintGallery } from "./MintGallery";
 import { NotificationSection } from "./NotificationSection";
@@ -181,6 +182,9 @@ function ConnectMenu() {
 
         <SectionDivider title="Message Signing" />
         <SignButton />
+
+        <SectionDivider title="Missions" />
+        <MissionsSection />
       </div>
     );
   }
@@ -235,6 +239,76 @@ function MintGalleryWithNotifications({ address }: { address: `0x${string}` }) {
       emptySlotBg="#333"
       emptySlotBorder="#555"
     />
+  );
+}
+
+function MissionsSection() {
+  const [status, setStatus] = useState<MissionStatus | null>(null);
+  const [completeResult, setCompleteResult] = useState<{ success: true } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState<"status" | "complete" | null>(null);
+
+  const handleGetStatus = async () => {
+    setError(null);
+    setCompleteResult(null);
+    setPending("status");
+    try {
+      const result = await getMissionStatus();
+      setStatus(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setPending(null);
+    }
+  };
+
+  const handleComplete = async () => {
+    setError(null);
+    setStatus(null);
+    setPending("complete");
+    try {
+      const result = await completeMission();
+      setCompleteResult(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setPending(null);
+    }
+  };
+
+  return (
+    <div>
+      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+        <button type="button" onClick={handleGetStatus} disabled={pending !== null}>
+          {pending === "status" ? "Loading..." : "Get Mission Status"}
+        </button>
+        <button type="button" onClick={handleComplete} disabled={pending !== null}>
+          {pending === "complete" ? "Completing..." : "Complete Mission"}
+        </button>
+      </div>
+      {status !== null && (
+        <div style={{ marginTop: "12px" }}>
+          <div style={{ marginBottom: "8px", fontWeight: "500", fontSize: "14px" }}>Mission Status</div>
+          <pre style={{ fontSize: "11px", fontFamily: "monospace", lineHeight: "1.4", whiteSpace: "pre-wrap" }}>
+            {JSON.stringify(status, null, 2)}
+          </pre>
+        </div>
+      )}
+      {completeResult && (
+        <div style={{ marginTop: "12px" }}>
+          <div style={{ marginBottom: "8px", fontWeight: "500", fontSize: "14px" }}>Complete Result</div>
+          <pre style={{ fontSize: "11px", fontFamily: "monospace", lineHeight: "1.4", whiteSpace: "pre-wrap" }}>
+            {JSON.stringify(completeResult, null, 2)}
+          </pre>
+        </div>
+      )}
+      {error && (
+        <div style={{ marginTop: "12px" }}>
+          <div style={{ marginBottom: "8px", fontWeight: "500", fontSize: "14px" }}>Error</div>
+          <div style={{ color: "red", fontSize: "12px" }}>{error}</div>
+        </div>
+      )}
+    </div>
   );
 }
 
