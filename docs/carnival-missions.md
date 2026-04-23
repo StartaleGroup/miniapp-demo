@@ -77,7 +77,7 @@ After completion:
 
 Marks the mission as completed for the connected user. Resolves to `{ success: true }` on success and rejects otherwise — there is no `success: false` resolution. Rejection cases:
 
-- Preview mode with no miniapp id bound — rejects with `'No miniappId found'`.
+- No miniapp id configured on the host (e.g. developer preview without an id) — rejects with `'No miniappId configured'`.
 - Backend failure — rejects with `Failed to complete mission[: <backend message>]`.
 
 Retry behaviour is backend-dependent: a second call on an already-completed mission may resolve with `{ success: true }` again, or reject with an "already completed" message from the backend. Treat either outcome as a successful prior completion.
