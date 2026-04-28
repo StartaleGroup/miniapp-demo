@@ -25,7 +25,7 @@ Returns the current mission status for the connected user. Resolves to `null` in
 - The host has no miniapp id bound (developer preview without an id).
 - No mission instance is configured on the backend for this miniapp's developer id.
 
-Once a mission instance exists, the promise resolves to a populated record; a fresh user who has not yet progressed the mission receives `{ completed: false, amountAwarded: 0, timesProgressed: 0 }` with `completedAt` absent. Treat the `null` and zeroed-record cases as distinct — `null` means "no mission to show", a record means "mission exists, here is the progress".
+Once a mission instance exists, the promise resolves to a populated record; a fresh user who has not yet progressed the mission receives `{ completed: false, amountAwarded: 0 }` with `completedAt` absent. Treat the `null` and zeroed-record cases as distinct — `null` means "no mission to show", a record means "mission exists, here is the progress".
 
 **Signature**
 
@@ -40,7 +40,6 @@ type MissionStatus = {
   completed: boolean;       // true once the mission has been completed
   amountAwarded: number;    // points awarded from this mission
   completedAt?: string;     // ISO timestamp, present when completed === true
-  timesProgressed: number;  // number of progress events recorded so far
 } | null;
 ```
 
@@ -58,7 +57,6 @@ Mission configured, user has not completed it yet:
 {
   "completed": false,
   "amountAwarded": 0,
-  "timesProgressed": 3
 }
 ```
 
@@ -69,7 +67,6 @@ After completion:
   "completed": true,
   "amountAwarded": 500,
   "completedAt": "2026-04-22T10:14:00.000Z",
-  "timesProgressed": 5
 }
 ```
 
@@ -110,7 +107,6 @@ export type MissionStatus = {
   completed: boolean;
   amountAwarded: number;
   completedAt?: string;
-  timesProgressed: number;
 } | null;
 
 type StartaleNamespace = {
@@ -178,7 +174,7 @@ Until the Carnival campaign launches, exercise the integration through Startale 
 
 1. Run the Mini App locally (or deploy a preview URL).
 2. Load the Mini App inside the Startale App **developer preview** page. The preview binds a test miniapp id so the host methods talk to the real backend.
-3. Call `getMissionStatus()` — for a fresh user against a configured mission you should see `{ completed: false, amountAwarded: 0, timesProgressed: 0 }`. If you instead see `null`, the preview fixture is missing on the backend (ask the Startale team to swap it).
+3. Call `getMissionStatus()` — for a fresh user against a configured mission you should see `{ completed: false, amountAwarded: 0 }`. If you instead see `null`, the preview fixture is missing on the backend (ask the Startale team to swap it).
 4. Call `completeMission()` — it should resolve with `{ success: true }`.
 5. Call `getMissionStatus()` again — `completed` should now be `true` and `completedAt` populated.
 
