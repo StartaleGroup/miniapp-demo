@@ -1,30 +1,31 @@
-{
-  "accountAssociation": {
-    "header": "eyJmaWQiOjMzODQxMCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDFiNzZmYzlmYkY4MzBGM2FFQTRiMjM0NDIwYTI0MjU2ZTkwMDYxNTMifQ",
-    "payload": "eyJkb21haW4iOiJpbmtpbmctZmFyY2FzdGVyLW1pbmlhcHAudmVyY2VsLmFwcCJ9",
-    "signature": "dV6RvkSGt1O4zbitDtw3ZZFvgyghngAS7OXzlcycmCBNT4j7zX7K1A70U+5i6+ZUJohK9ZEmyL2PL5mpqj/mNxw="
-  },
-  "miniapp": {
-    "version": "1",
-    "name": "Inking",
-    "tagline": "This is inking tagline",
-    "subtitle": "This is inking subtitle",
-    "description": "Client side demo of minting and notifications (no backend)",
-    "iconUrl": "https://startale-miniapp-demo.vercel.app/icon.png",
-    "homeUrl": "https://startale-miniapp-demo.vercel.app",
-    "imageUrl": "https://startale-miniapp-demo.vercel.app/preview.jpg",
-    "heroImageUrl": "https://startale-miniapp-demo.vercel.app/heroImage.webp",
-    "buttonTitle": "Launch Inking",
-    "splashImageUrl": "https://startale-miniapp-demo.vercel.app/splash.png",
-    "splashBackgroundColor": "#4f46e5",
-    "primaryCategory": "entertainment",
-    "tags": ["nft", "wallet", "minting", "notifications", "demo"],
-    "startale": {
-      "featuredBannerImageUrl": "https://startale-miniapp-demo.vercel.app/featuredBanner.webp",
-      "projectWebsite": "https://github.com/Maar-io/inking-farcaster-miniapp-",
+{                                                                                                                                                    
+    "accountAssociation": {
+      "header": "eyJmaWQiOjMzODQxMCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDFiNzZmYzlmYkY4MzBGM2FFQTRiMjM0NDIwYTI0MjU2ZTkwMDYxNTMifQ",                      
+      "payload": "eyJkb21haW4iOiJpbmtpbmctZmFyY2FzdGVyLW1pbmlhcHAudmVyY2VsLmFwcCJ9",                                                                   
+      "signature": "dV6RvkSGt1O4zbitDtw3ZZFvgyghngAS7OXzlcycmCBNT4j7zX7K1A70U+5i6+ZUJohK9ZEmyL2PL5mpqj/mNxw="                                          
+    },                                                                                                                                                 
+    "frame": {                                                                                                                                         
+      "version": "1",                                                                                                                                  
+      "name": "Inking",                                                                                                  
+      "tagline": "This is inking tagline",                                                                                                             
+      "iconUrl": "http://localhost:5174/icon.png",                                                    
+      "homeUrl": "http://localhost:5174",                                                                                           
+      "heroImageUrl": "http://localhost:5174/heroImage.webp",
+      "splashImageUrl": "http://localhost:5174/splash.png",                                                                         
+      "splashBackgroundColor": "#4f46e5",                                                                                
+      "primaryCategory": "entertainment",                                                                                                              
+      "tags": ["nft", "wallet", "minting", "notifications", "demo"]                                                    
+    },                                                                                                                                                 
+    "startale": {                                                                                                        
+      "manifestVersion": "2.3",                     
+      "featuredBannerImageUrl": "http://localhost:5174/featuredBanner.webp",
+      "projectWebsite": "https://github.com/Maar-io/inking-farcaster-miniapp-",                                                                        
       "socialLinks": {
-        "twitter": "https://twitter.com/Maar_io"
-      }
-    }
-  }
-}
+        "twitter": "https://twitter.com/Maar_io"                                                                                                       
+      },
+      "screenCompatibility": {                                                                                                                         
+        "desktop": true,
+        "landscapeOnly": false                                                                                                                              
+      }                                                                                                                     
+    }                                                                                                                                                  
+  }                              
