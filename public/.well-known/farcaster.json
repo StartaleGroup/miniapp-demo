@@ -14,10 +14,7 @@
       "splashImageUrl": "http://localhost:5174/splash.png",                                                                         
       "splashBackgroundColor": "#4f46e5",                                                                                
       "primaryCategory": "entertainment",                                                                                                              
-      "tags": ["nft", "wallet", "minting", "notifications", "demo"],                                                     
-      "screenCompatibility": {                                                                                                                         
-        "desktop": true                                                                                                                                
-      }                                             
+      "tags": ["nft", "wallet", "minting", "notifications", "demo"]                                                    
     },                                                                                                                                                 
     "startale": {                                                                                                        
       "manifestVersion": "2.3",                     
@@ -25,6 +22,10 @@
       "projectWebsite": "https://github.com/Maar-io/inking-farcaster-miniapp-",                                                                        
       "socialLinks": {
         "twitter": "https://twitter.com/Maar_io"                                                                                                       
-      }                                                                                                                  
+      },
+      "screenCompatibility": {                                                                                                                         
+        "desktop": true,
+        "landscapeOnly": false                                                                                                                              
+      }                                                                                                                     
     }                                                                                                                                                  
   }                              
